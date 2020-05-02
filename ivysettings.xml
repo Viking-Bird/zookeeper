@@ -1,46 +1,60 @@
 <ivysettings>
 
- <!--
-   Licensed to the Apache Software Foundation (ASF) under one or more
-   contributor license agreements.  See the NOTICE file distributed with
-   this work for additional information regarding copyright ownership.
-   The ASF licenses this file to You under the Apache License, Version 2.0
-   (the "License"); you may not use this file except in compliance with
-   the License.  You may obtain a copy of the License at
+    <!--
+      Licensed to the Apache Software Foundation (ASF) under one or more
+      contributor license agreements.  See the NOTICE file distributed with
+      this work for additional information regarding copyright ownership.
+      The ASF licenses this file to You under the Apache License, Version 2.0
+      (the "License"); you may not use this file except in compliance with
+      the License.  You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+          http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
--->
+      Unless required by applicable law or agreed to in writing, software
+      distributed under the License is distributed on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+      See the License for the specific language governing permissions and
+      limitations under the License.
+   -->
 
-  <property name="repo.maven.org"
-    value="http://repo1.maven.org/maven2/" override="false"/>
-  <property name="repo.jboss.org"
-    value="http://repository.jboss.org/nexus/content/groups/public/" override="false"/>
-  <property name="repo.sun.org"
-    value="http://download.java.net/maven/2/" override="false"/>
-  <property name="maven2.pattern"
-    value="[organisation]/[module]/[revision]/[module]-[revision]"/>
-  <property name="maven2.pattern.ext" value="${maven2.pattern}.[ext]"/>
-  <include url="${ivy.default.conf.dir}/ivyconf-local.xml"/>
-  <settings defaultResolver="default"/>
-  <resolvers>
-    <ibiblio name="maven2" root="${repo.maven.org}"
-      pattern="${maven2.pattern.ext}" m2compatible="true"/>
-    <ibiblio name="jboss-maven2" root="${repo.jboss.org}"
-      pattern="${maven2.pattern.ext}" m2compatible="true"/>
-    <ibiblio name="sun-maven2" root="${repo.sun.org}"
-      pattern="${maven2.pattern.ext}" m2compatible="true"/>
+    <property name="repo.maven.org"
+              value="http://repo1.maven.org/maven2/" override="false"/>
+    <property name="repo.jboss.org"
+              value="http://repository.jboss.org/nexus/content/groups/public/" override="false"/>
+    <property name="repo.sun.org"
+              value="http://download.java.net/maven/2/" override="false"/>
+    <property name="maven2.pattern"
+              value="[organisation]/[module]/[revision]/[module]-[revision]"/>
+    <property name="maven2.pattern.ext" value="${maven2.pattern}.[ext]"/>
+    <include url="${ivy.default.conf.dir}/ivyconf-local.xml"/>
+    <settings defaultResolver="default"/>
+    <property name="m2-pattern" value="/Users/pengwang/Documents/maven/repo/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]" override="true" />
 
-    <chain name="default" dual="true">
-      <resolver ref="maven2"/>
-      <resolver ref="jboss-maven2"/>
-      <resolver ref="sun-maven2"/>
-    </chain>
+    <timeout-constraints>
+        <timeout-constraint name="timeout-1" connectionTimeout="120000" readTimeout="120000"/>
+    </timeout-constraints>
 
-  </resolvers>
+    <resolvers>
+        <url name="working-chinese-mirror" timeoutConstraint="timeout-1"/>
+        <ibiblio name="working-chinese-mirror" root="http://maven.aliyun.com/nexus/content/groups/public/"
+                 m2compatible="true" timeoutConstraint="timeout-1"/>
+        <ibiblio name="maven2" root="${repo.maven.org}"
+                 pattern="${maven2.pattern.ext}" m2compatible="true" timeoutConstraint="timeout-1"/>
+        <ibiblio name="jboss-maven2" root="${repo.jboss.org}"
+                 pattern="${maven2.pattern.ext}" m2compatible="true" timeoutConstraint="timeout-1"/>
+        <ibiblio name="sun-maven2" root="${repo.sun.org}"
+                 pattern="${maven2.pattern.ext}" m2compatible="true" timeoutConstraint="timeout-1"/>
+
+        <chain name="default" dual="true">
+            <resolver ref="working-chinese-mirror"/>
+            <resolver ref="maven2"/>
+            <resolver ref="jboss-maven2"/>
+            <resolver ref="sun-maven2"/>
+            <filesystem name="local-maven2" m2compatible="true" >
+                <artifact pattern="${m2-pattern}"/>
+                <ivy pattern="${m2-pattern}"/>
+            </filesystem>
+        </chain>
+
+    </resolvers>
 </ivysettings>

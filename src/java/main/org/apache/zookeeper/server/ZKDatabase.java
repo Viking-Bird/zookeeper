@@ -380,7 +380,7 @@ public class ZKDatabase {
      * @param watcher the watcher function
      */
     public void setWatches(long relativeZxid, List<String> dataWatches,
-            List<String> existWatches, List<String> childWatches, Watcher watcher) {
+            List<String> existWatches, List<String> childWatches, Watcher watcher) throws KeeperException, InterruptedException {
         dataTree.setWatches(relativeZxid, dataWatches, existWatches, childWatches, watcher);
     }
     

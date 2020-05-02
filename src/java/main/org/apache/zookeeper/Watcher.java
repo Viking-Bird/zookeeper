@@ -145,5 +145,5 @@ public interface Watcher {
         }
     }
 
-    abstract public void process(WatchedEvent event);
+    abstract public void process(WatchedEvent event) throws KeeperException, InterruptedException;
 }
