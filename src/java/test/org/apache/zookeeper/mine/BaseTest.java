@@ -6,7 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -27,7 +26,7 @@ public class BaseTest {
         try {
             zk = new ZooKeeper(connectString, sessionTimeout, new WatchTest());
             countDownLatch.await();
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -150,11 +149,13 @@ public class BaseTest {
         String path = "/zk_test_" + System.currentTimeMillis();
         try {
             zk.exists(path, true);
-            zk.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+
+            zk.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             zk.setData(path, "123".getBytes(), -1);
 
-            zk.create(path + "/c1", "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+            zk.create(path + "/c1", "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             zk.delete(path + "/c1", -1);
+
             zk.delete(path, -1);
 
             Thread.sleep(Integer.MAX_VALUE);
@@ -184,15 +185,6 @@ public class BaseTest {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else if (event.getType() == Event.EventType.NodeDataChanged) {
-                    try {
-                        System.out.println(event.getPath() + " DataChanged，最新值：" + new String(zk.getData(event.getPath(), true, stat)));
-//                        System.out.println(stat.getCzxid() + "," + stat.getMzxid() + "," + stat.getVersion());
-                    } catch (KeeperException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 } else if (event.getType() == Event.EventType.NodeCreated) {
                     System.out.println(event.getPath() + " Created");
                     try {
@@ -205,6 +197,16 @@ public class BaseTest {
                 } else if (event.getType() == Event.EventType.NodeDeleted) {
                     System.out.println(event.getPath() + " Deleted");
                     try {
+                        zk.exists(event.getPath(), true);
+                    } catch (KeeperException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } else if (event.getType() == Event.EventType.NodeDataChanged) {
+                    try {
+                        System.out.println(event.getPath() + " DataChanged，最新值：" + new String(zk.getData(event.getPath(), true, stat)));
+//                        System.out.println(stat.getCzxid() + "," + stat.getMzxid() + "," + stat.getVersion());
                         zk.exists(event.getPath(), true);
                     } catch (KeeperException e) {
                         e.printStackTrace();

@@ -1269,55 +1269,36 @@ public class DataTree {
                            List<String> existWatches, List<String> childWatches,
                            Watcher watcher) {
         for (String path : dataWatches) {
-            try {
-                DataNode node = getNode(path);
-                if (node == null) {
-                    watcher.process(new WatchedEvent(EventType.NodeDeleted,
-                            KeeperState.SyncConnected, path));
-
-                } else if (node.stat.getMzxid() > relativeZxid) {
-                    watcher.process(new WatchedEvent(EventType.NodeDataChanged,
-                            KeeperState.SyncConnected, path));
-                } else {
-                    this.dataWatches.addWatch(path, watcher);
-                }
-            } catch (KeeperException | InterruptedException e) {
-                e.printStackTrace();
+            DataNode node = getNode(path);
+            if (node == null) {
+                watcher.process(new WatchedEvent(EventType.NodeDeleted,
+                        KeeperState.SyncConnected, path));
+            } else if (node.stat.getMzxid() > relativeZxid) {
+                watcher.process(new WatchedEvent(EventType.NodeDataChanged,
+                        KeeperState.SyncConnected, path));
+            } else {
+                this.dataWatches.addWatch(path, watcher);
             }
         }
         for (String path : existWatches) {
             DataNode node = getNode(path);
             if (node != null) {
-                try {
-                    watcher.process(new WatchedEvent(EventType.NodeCreated,
-                            KeeperState.SyncConnected, path));
-                } catch (KeeperException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                watcher.process(new WatchedEvent(EventType.NodeCreated,
+                        KeeperState.SyncConnected, path));
             } else {
                 this.dataWatches.addWatch(path, watcher);
             }
         }
         for (String path : childWatches) {
             DataNode node = getNode(path);
-            try {
-                if (node == null) {
-                    watcher.process(new WatchedEvent(EventType.NodeDeleted,
-                            KeeperState.SyncConnected, path));
-
-                } else if (node.stat.getPzxid() > relativeZxid) {
-                    watcher.process(new WatchedEvent(EventType.NodeChildrenChanged,
-                            KeeperState.SyncConnected, path));
-                } else {
-                    this.childWatches.addWatch(path, watcher);
-                }
-
-            } catch (KeeperException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (node == null) {
+                watcher.process(new WatchedEvent(EventType.NodeDeleted,
+                        KeeperState.SyncConnected, path));
+            } else if (node.stat.getPzxid() > relativeZxid) {
+                watcher.process(new WatchedEvent(EventType.NodeChildrenChanged,
+                        KeeperState.SyncConnected, path));
+            } else {
+                this.childWatches.addWatch(path, watcher);
             }
         }
     }
