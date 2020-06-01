@@ -472,10 +472,12 @@ public class PrepRequestProcessor extends Thread implements RequestProcessor {
                 // queues up this operation without being the session owner.
                 // this request is the last of the session so it should be ok
                 //zks.sessionTracker.checkSession(request.sessionId, request.getOwner());
+                // 当客户端关闭session的时候，获取当前session创建的临时节点
                 HashSet<String> es = zks.getZKDatabase()
                         .getEphemerals(request.sessionId);
                 synchronized (zks.outstandingChanges) {
                     for (ChangeRecord c : zks.outstandingChanges) {
+                        // 对于尚未完成的变化，如果是临时节点，就添加到集合中。
                         if (c.stat == null) {
                             // Doing a delete
                             es.remove(c.path);
@@ -483,11 +485,12 @@ public class PrepRequestProcessor extends Thread implements RequestProcessor {
                             es.add(c.path);
                         }
                     }
+                    // 删除当前session的临时节点
                     for (String path2Delete : es) {
                         addChangeRecord(new ChangeRecord(request.hdr.getZxid(),
                                 path2Delete, null, 0, null));
                     }
-
+                    // 调用sessionTracker关闭session
                     zks.sessionTracker.setSessionClosing(request.sessionId);
                 }
 

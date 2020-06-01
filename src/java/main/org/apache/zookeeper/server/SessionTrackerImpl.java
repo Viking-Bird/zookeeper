@@ -42,21 +42,27 @@ import org.apache.zookeeper.KeeperException.SessionExpiredException;
 public class SessionTrackerImpl extends Thread implements SessionTracker {
     private static final Logger LOG = LoggerFactory.getLogger(SessionTrackerImpl.class);
 
+    /**
+     * 使用synchronized关键字对put操作加锁，保证线程安全
+     */
     HashMap<Long, SessionImpl> sessionsById = new HashMap<Long, SessionImpl>();
 
     HashMap<Long, SessionSet> sessionSets = new HashMap<Long, SessionSet>();
 
     ConcurrentHashMap<Long, Integer> sessionsWithTimeout;
     long nextSessionId = 0;
+
+    // 下一个超时时间点
     long nextExpirationTime;
 
+    // 超时间隔
     int expirationInterval;
 
     public static class SessionImpl implements Session {
         SessionImpl(long sessionId, int timeout, long expireTime) {
             this.sessionId = sessionId;
             this.timeout = timeout;
-            this.tickTime = expireTime;
+            this.tickTime = expireTime; //下次会话的超时时间点,会不断刷新
             isClosing = false;
         }
 
@@ -85,6 +91,11 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
 
     SessionExpirer expirer;
 
+    /**
+     * expireTime总是expirationInterval的整数倍
+     * @param time
+     * @return
+     */
     private long roundToInterval(long time) {
         // We give a one interval grace period
         return (time / expirationInterval + 1) * expirationInterval;
@@ -107,6 +118,7 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
 
     volatile boolean running = true;
 
+    // 系统当前时间
     volatile long currentTime;
 
     synchronized public void dumpSessions(PrintWriter pwriter) {
@@ -142,18 +154,24 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
         try {
             while (running) {
                 currentTime = System.currentTimeMillis();
+                // 1、如果当前时间还没到下一次超时时间点，则让线程wait间隔的时间
                 if (nextExpirationTime > currentTime) {
                     this.wait(nextExpirationTime - currentTime);
                     continue;
                 }
+                // 2、到了超时时间点，开始处理session过期任务
                 SessionSet set;
+                // 拿出当前过期时间点的所有session
                 set = sessionSets.remove(nextExpirationTime);
                 if (set != null) {
                     for (SessionImpl s : set.sessions) {
+                        // 循环设置session closing = true
                         setSessionClosing(s.sessionId);
+                        // 然后交给session过期处理器处理
                         expirer.expire(s);
                     }
                 }
+                // 3、过期任务处理完毕，设置下一次超时任务执行时间点
                 nextExpirationTime += expirationInterval;
             }
         } catch (InterruptedException e) {
@@ -174,16 +192,23 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
         if (s == null || s.isClosing()) {
             return false;
         }
+        // 重新计算超时时间
         long expireTime = roundToInterval(System.currentTimeMillis() + timeout);
         if (s.tickTime >= expireTime) {
             // Nothing needs to be done
             return true;
         }
+
+        // 在这个时间点，很有很多的session，这里的sessionSets用于封装这些session
         SessionSet set = sessionSets.get(s.tickTime);
         if (set != null) {
+            // 从sessionSets移除当前session
             set.sessions.remove(s);
         }
+        // 为此session设置下一个超时时间点
         s.tickTime = expireTime;
+
+        // 获取下一个超时时间点的sessionSet，并把当前session添加到set中
         set = sessionSets.get(s.tickTime);
         if (set == null) {
             set = new SessionSet();
@@ -254,6 +279,7 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
                         + Long.toHexString(id) + " " + sessionTimeout);
             }
         }
+        // 将会话保存到超时时间集合中
         touchSession(id, sessionTimeout);
     }
 
