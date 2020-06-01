@@ -193,6 +193,7 @@ public class SyncRequestProcessor extends Thread implements RequestProcessor {
         if (toFlush.isEmpty())
             return;
 
+        // 提交事务日志
         zks.getZKDatabase().commit();
         while (!toFlush.isEmpty()) {
             Request i = toFlush.remove();

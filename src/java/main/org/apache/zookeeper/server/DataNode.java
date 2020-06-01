@@ -29,6 +29,8 @@ import org.apache.zookeeper.data.Stat;
 import org.apache.zookeeper.data.StatPersisted;
 
 /**
+ *
+ * 保存数据节点信息
  * This class contains the data for a node in the data tree.
  * <p>
  * A data node contains a reference to its parent, a byte array as its data, an

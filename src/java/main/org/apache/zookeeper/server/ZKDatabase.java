@@ -51,6 +51,8 @@ import org.apache.zookeeper.server.util.SerializeUtils;
 import org.apache.zookeeper.txn.TxnHeader;
 
 /**
+ * ZK内存数据库，负责管理ZK的所有会话、DataTree存储和事务日志。ZKDatabase会定时向磁盘dump快照数据，
+ * 同时ZK服务器启动的时候，会通过磁盘上的事务日志和快照数据文件恢复成一个完整的内存数据库
  * This class maintains the in memory database of zookeeper
  * server states that includes the sessions, datatree and the
  * committed logs. It is booted up  after reading the logs
@@ -319,6 +321,7 @@ public class ZKDatabase {
     }
 
     /**
+     * 处理写请求
      * the process txn on the data
      * @param hdr the txnheader for the txn
      * @param txn the transaction that needs to be processed

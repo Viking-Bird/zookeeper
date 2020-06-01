@@ -2,6 +2,9 @@ package org.apache.zookeeper.mine;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
+import org.apache.zookeeper.server.DataTree;
+import org.apache.zookeeper.server.ZKDatabase;
+import org.apache.zookeeper.server.persistence.FileTxnLog;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +34,13 @@ public class BaseTest {
         }
     }
 
+    @Test
+    public void test1() {
+        DataTree dataTree;
+        ZKDatabase zkDatabase;
+        FileTxnLog fileTxnLog;
+    }
+
     /**
      * 测试同步创建节点API
      */
@@ -54,9 +64,9 @@ public class BaseTest {
      */
     @Test
     public void testCreateWithAsync() {
-        zk.create("/zk-test1-EPHEMERAL", "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL, new IStringCallBack(), "我是小猴");
-        zk.create("/zk-test1-EPHEMERAL", "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL, new IStringCallBack(), "我是小猴");
-        zk.create("/zk-test1-EPHEMERAL", "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL, new IStringCallBack(), "我是小猴");
+        zk.create("/zk-test3-EPHEMERAL", "123".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT, new IStringCallBack(), "123");
+        zk.create("/zk-test3-EPHEMERAL", "123".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT, new IStringCallBack(), "我是小猴");
+        zk.create("/zk-test3-EPHEMERAL", "123".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL, new IStringCallBack(), "123");
     }
 
     /**

@@ -46,6 +46,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 负责事务日志的写入与读取
+ *
  * This class implements the TxnLog interface. It provides api's
  * to access the txnlogs and add entries to it.
  * <p>
@@ -181,8 +183,8 @@ public class FileTxnLog implements TxnLog {
     
     /**
      * append an entry to the transaction log
-     * @param hdr the header of the transaction
-     * @param txn the transaction part of the entry
+     * @param hdr the header of the transaction 事务头
+     * @param txn the transaction part of the entry 事务体
      * returns true iff something appended, otw false 
      */
     public synchronized boolean append(TxnHeader hdr, Record txn)
@@ -325,7 +327,7 @@ public class FileTxnLog implements TxnLog {
             log.flush();
             if (forceSync) {
                 long startSyncNS = System.nanoTime();
-
+                // 调用FileChannel.force来保证数据完全同步到磁盘
                 log.getChannel().force(false);
 
                 long syncElapsedMS =

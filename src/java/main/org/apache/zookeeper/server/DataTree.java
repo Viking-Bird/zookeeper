@@ -64,6 +64,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * ZK内存数据存储的核心，代表内存中一份完整的数据。它不包含任何与网络、客户端连接及请求处理等相关的业务逻辑，是一个非常独立的组件
  * This class maintains the tree data structure. It doesn't have any networking
  * or client connection code in it so that it can be tested in a stand alone
  * way.
@@ -76,6 +77,7 @@ public class DataTree {
     private static final Logger LOG = LoggerFactory.getLogger(DataTree.class);
 
     /**
+     * 保存ZK服务器上所有的数据节点，对ZK数据的所有操作，都是对这个Map结构的操作，Key是节点路径，Value是节点数据内容
      * This hashtable provides a fast lookup to the datanodes. The tree is the
      * source of truth and is where all the locking occurs
      */
@@ -119,6 +121,7 @@ public class DataTree {
     private final PathTrie pTrie = new PathTrie();
 
     /**
+     * 保存临时节点，Key是sessionID，value是临时节点路径集合
      * This hashtable lists the paths of the ephemeral nodes of a session.
      */
     private final Map<Long, HashSet<String>> ephemerals =
