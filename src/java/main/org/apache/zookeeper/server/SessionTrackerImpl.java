@@ -98,6 +98,8 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
      */
     private long roundToInterval(long time) {
         // We give a one interval grace period
+        //expirationInterval就是zookeeper的心跳周期（tickTime），默认值是3000
+        //这段计算的意思是将过期时间每3000ms分一个段
         return (time / expirationInterval + 1) * expirationInterval;
     }
 

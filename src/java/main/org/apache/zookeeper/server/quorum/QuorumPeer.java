@@ -122,6 +122,9 @@ public class QuorumPeer extends Thread implements QuorumStats.Provider {
         public LearnerType type = LearnerType.PARTICIPANT;
     }
 
+    /**
+     * 服务的四种状态
+     */
     public enum ServerState {
         LOOKING, FOLLOWING, LEADING, OBSERVING;
     }

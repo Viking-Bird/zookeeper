@@ -72,10 +72,11 @@ public class QuorumPeerConfig {
     protected QuorumVerifier quorumVerifier;
     protected int snapRetainCount = 3;
     protected int purgeInterval = 0;
+    // 标识observer节点是否持久化日志和快照到磁盘，这可以缩短observer重启时恢复的时间。默认是true，设置为false表示禁用此项功能
     protected boolean syncEnabled = true;
 
     protected LearnerType peerType = LearnerType.PARTICIPANT;
-    
+
     /**
      * Minimum snapshot retain count.
      * @see org.apache.zookeeper.server.PurgeTxnLog#purge(File, File, int)
@@ -233,7 +234,7 @@ public class QuorumPeerConfig {
                 System.setProperty("zookeeper." + key, value);
             }
         }
-        
+
         // Reset to MIN_SNAP_RETAIN_COUNT if invalid (less than 3)
         // PurgeTxnLog.purge(File, File, int) will not allow to purge less
         // than 3.
@@ -344,7 +345,7 @@ public class QuorumPeerConfig {
             // Now add observers to servers, once the quorums have been
             // figured out
             servers.putAll(observers);
-    
+
             File myIdFile = new File(dataDir, "myid");
             if (!myIdFile.exists()) {
                 throw new IllegalArgumentException(myIdFile.toString()
@@ -364,7 +365,7 @@ public class QuorumPeerConfig {
                 throw new IllegalArgumentException("serverid " + myIdString
                         + " is not a number");
             }
-            
+
             // Warn about inconsistent peer type
             LearnerType roleByServersList = observers.containsKey(serverId) ? LearnerType.OBSERVER
                     : LearnerType.PARTICIPANT;
@@ -372,7 +373,7 @@ public class QuorumPeerConfig {
                 LOG.warn("Peer type from servers list (" + roleByServersList
                         + ") doesn't match peerType (" + peerType
                         + "). Defaulting to servers list.");
-    
+
                 peerType = roleByServersList;
             }
         }
@@ -389,8 +390,8 @@ public class QuorumPeerConfig {
     public int getInitLimit() { return initLimit; }
     public int getSyncLimit() { return syncLimit; }
     public int getElectionAlg() { return electionAlg; }
-    public int getElectionPort() { return electionPort; }    
-    
+    public int getElectionPort() { return electionPort; }
+
     public int getSnapRetainCount() {
         return snapRetainCount;
     }
@@ -398,12 +399,12 @@ public class QuorumPeerConfig {
     public int getPurgeInterval() {
         return purgeInterval;
     }
-    
+
     public boolean getSyncEnabled() {
         return syncEnabled;
     }
 
-    public QuorumVerifier getQuorumVerifier() {   
+    public QuorumVerifier getQuorumVerifier() {
         return quorumVerifier;
     }
 
