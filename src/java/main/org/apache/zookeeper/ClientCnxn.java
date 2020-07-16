@@ -77,6 +77,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 这个类管理客户端的套接字i/o，ClientCnxn维护一个可用服务器的列表，并根据需要透明地在服务器列表之间切换
  * This class manages the socket i/o for the client. ClientCnxn maintains a list
  * of available servers to connect to and "transparently" switches servers it is
  * connected to as needed.
@@ -695,6 +696,7 @@ public class ClientCnxn {
             4096 * 1024);
 
     /**
+     * 负责发请求和维持心跳的线程
      * This class services the outgoing request queue and generates the heart
      * beats. It also spawns the ReadThread.
      */
@@ -988,6 +990,7 @@ public class ClientCnxn {
             final int MAX_SEND_PING_INTERVAL = 10000; //10 seconds
             while (state.isAlive()) {
                 try {
+                    // 客户端未连接，执行重连
                     if (!clientCnxnSocket.isConnected()) {
                         if(!isFirstConnect){
                             try {
@@ -1004,6 +1007,7 @@ public class ClientCnxn {
                         clientCnxnSocket.updateLastSendAndHeard();
                     }
 
+                    // 客户端已连接的逻辑
                     if (state.isConnected()) {
                         // determine whether we need to send an AuthFailed event.
                         if (zooKeeperSaslClient != null) {
@@ -1036,8 +1040,10 @@ public class ClientCnxn {
                                       authState,null));
                             }
                         }
+                        // 已连接状态，用响应超时时间减去-心跳间隔时间（getIdleRecv是用现在的时间减去上次心跳的时间）
                         to = readTimeout - clientCnxnSocket.getIdleRecv();
                     } else {
+                        // 未连接状态，用连接超时时间减去-心跳间隔时间（getIdleRecv是用现在的时间减去上次心跳的时间）
                         to = connectTimeout - clientCnxnSocket.getIdleRecv();
                     }
                     
@@ -1200,6 +1206,7 @@ public class ClientCnxn {
         /**
          * Callback invoked by the ClientCnxnSocket once a connection has been
          * established.
+         * 连接建立后被ClientCnxnSocket回调
          * 
          * @param _negotiatedSessionTimeout
          * @param _sessionId
@@ -1224,8 +1231,8 @@ public class ClientCnxn {
             if (!readOnly && isRO) {
                 LOG.error("Read/write client got connected to read-only server");
             }
-            readTimeout = negotiatedSessionTimeout * 2 / 3;
-            connectTimeout = negotiatedSessionTimeout / hostProvider.size();
+            readTimeout = negotiatedSessionTimeout * 2 / 3; // 响应超时
+            connectTimeout = negotiatedSessionTimeout / hostProvider.size(); // 连接超时
             hostProvider.onConnected();
             sessionId = _sessionId;
             sessionPasswd = _sessionPasswd;
