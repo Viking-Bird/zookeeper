@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -33,12 +33,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 底层Socket通信层
  * A ClientCnxnSocket does the lower level communication with a socket
  * implementation.
- * 
+ *
  * This code has been moved out of ClientCnxn so that a Netty implementation can
  * be provided as an alternative to the NIO socket code.
- * 
+ *
  */
 abstract class ClientCnxnSocket {
     private static final Logger LOG = LoggerFactory.getLogger(ClientCnxnSocket.class);
@@ -57,8 +58,8 @@ abstract class ClientCnxnSocket {
     protected ByteBuffer incomingBuffer = lenBuffer;
     protected long sentCount = 0;
     protected long recvCount = 0;
-    protected long lastHeard;
-    protected long lastSend;
+    protected long lastHeard;// 最近一次接收到服务端响应的时间
+    protected long lastSend;// 最近一次发送给服务端请求的时间
     protected long now;
     protected ClientCnxn.SendThread sendThread;
 
@@ -77,10 +78,18 @@ abstract class ClientCnxnSocket {
         now = System.currentTimeMillis();
     }
 
+    /**
+     * 计算多久没有接收到服务端响应
+     * @return
+     */
     int getIdleRecv() {
         return (int) (now - lastHeard);
     }
 
+    /**
+     * 计算多久没有给服务端发送请求
+     * @return
+     */
     int getIdleSend() {
         return (int) (now - lastSend);
     }
@@ -165,7 +174,7 @@ abstract class ClientCnxnSocket {
     abstract void enableReadWriteOnly();
 
     abstract void doTransport(int waitTimeOut, List<Packet> pendingQueue,
-            LinkedList<Packet> outgoingQueue, ClientCnxn cnxn)
+                              LinkedList<Packet> outgoingQueue, ClientCnxn cnxn)
             throws IOException, InterruptedException;
 
     abstract void testableCloseSocket() throws IOException;
