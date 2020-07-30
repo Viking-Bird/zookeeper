@@ -106,6 +106,8 @@ public class ObserverZooKeeperServer extends LearnerZooKeeperServer {
         ((ObserverRequestProcessor) firstProcessor).start();
 
         /*
+           如果syncRequestProcessorEnabled开启的情况下（缺省为开），这意味着Observer也会去记录事务日志以及做快照，
+           这会给下降一定的性能，以及更多的内存要求
          * Observer should write to disk, so that the it won't request
          * too old txn from the leader which may lead to getting an entire
          * snapshot.

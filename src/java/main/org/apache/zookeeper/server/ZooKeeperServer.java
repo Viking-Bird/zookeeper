@@ -120,6 +120,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     static final private long superSecret = 0XB3415C00L;
 
     int requestsInProcess;
+    // 事务变更队列
     final List<ChangeRecord> outstandingChanges = new ArrayList<ChangeRecord>();
     // this data structure must be accessed under the outstandingChanges lock
     final HashMap<String, ChangeRecord> outstandingChangesForPath =
@@ -307,6 +308,10 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
         return hzxid;
     }
 
+    /**
+     * 生成事务ID
+     * @return
+     */
     synchronized long getNextZxid() {
         return ++hzxid;
     }
@@ -492,6 +497,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     /**
+     * 用于PrepRP和FinalRP之间的信息共享
      * This structure is used to facilitate information sharing between PrepRP
      * and FinalRP.
      */
@@ -638,6 +644,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
     }
 
     /**
+     * 提交请求
      * @param cnxn
      * @param sessionId
      * @param xid
@@ -668,6 +675,7 @@ public class ZooKeeperServer implements SessionExpirer, ServerStats.Provider {
             touch(si.cnxn);
             boolean validpacket = Request.isValid(si.type);
             if (validpacket) {
+                // 将请求放到第一个处理器中
                 firstProcessor.processRequest(si);
                 if (si.cnxn != null) {
                     incInProcess();

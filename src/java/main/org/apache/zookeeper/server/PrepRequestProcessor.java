@@ -176,6 +176,10 @@ public class PrepRequestProcessor extends Thread implements RequestProcessor {
         return lastChange;
     }
 
+    /**
+     * 保存事务操作到outstandingChanges队列中
+     * @param c
+     */
     void addChangeRecord(ChangeRecord c) {
         synchronized (zks.outstandingChanges) {
             zks.outstandingChanges.add(c);
@@ -416,12 +420,14 @@ public class PrepRequestProcessor extends Thread implements RequestProcessor {
                         null, -1, null));
                 break;
             case OpCode.setData:
+                // 会话检查：比如会话超时
                 zks.sessionTracker.checkSession(request.sessionId, request.getOwner());
                 SetDataRequest setDataRequest = (SetDataRequest)record;
                 if(deserialize)
                     ByteBufferInputStream.byteBuffer2Record(request.request, setDataRequest);
                 path = setDataRequest.getPath();
                 nodeRecord = getRecordForPath(path);
+                // ACL检查
                 checkACL(zks, nodeRecord.acl, ZooDefs.Perms.WRITE,
                         request.authInfo);
                 version = setDataRequest.getVersion();
@@ -518,6 +524,8 @@ public class PrepRequestProcessor extends Thread implements RequestProcessor {
     }
 
     /**
+     * 对于非事务性请求：sync,exists, getData, getChildRen,ping, setWatches 这里只做session的检查看看是否超时
+     * 对于事务请求：create, delete,setData,setAcl,check,multi,根据请求的类型创建不同的操作
      * This method will be called inside the ProcessRequestThread, which is a
      * singleton, so there will be a single thread calling this code.
      *

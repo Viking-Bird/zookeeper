@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="49fcfb6f-ab34-4c22-a015-646d7b68ec28" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/LearnerZooKeeperServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/LearnerZooKeeperServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ObserverZooKeeperServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ObserverZooKeeperServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ProposalRequestProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ProposalRequestProcessor.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.eclipse/classes-main/" />
@@ -27,15 +29,24 @@
     <option name="HIDE_WARNINGS" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java">
+        <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="445" column="50" selection-start-line="445" selection-start-column="50" selection-end-line="445" selection-end-column="50" />
+            <state relative-caret-position="434">
+              <caret line="123" column="47" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="47" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#4680#4694#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/FinalRequestProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="341">
+              <caret line="101" column="56" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -51,8 +62,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>DataTree</find>
-      <find>triggerW</find>
       <find>watch2Paths</find>
       <find>FinalRequest</find>
       <find>WatchManager</find>
@@ -77,10 +86,17 @@
       <find>minSessionTimeout</find>
       <find>MAX_SEND_PING_INTERVAL</find>
       <find>WatchRegistration</find>
+      <find>PrepRequestProcessor</find>
+      <find>ProcessRequestThread</find>
+      <find>ProposalRe</find>
+      <find>CommitProcessor</find>
+      <find>FollowerRe</find>
+      <find>Obser</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/java/test/org/apache/zookeeper/mine</dir>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -97,15 +113,19 @@
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/FinalRequestProcessor.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/SyncRequestProcessor.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/persistence/FileTxnLog.java" />
-        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" />
         <option value="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/mine/BaseTest.java" />
         <option value="$PROJECT_DIR$/src/java/test/org/apache/zookeeper/mine/Main.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/SessionTrackerImpl.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeerConfig.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumPeer.java" />
-        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java" />
         <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ProposalRequestProcessor.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/LearnerZooKeeperServer.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ObserverZooKeeperServer.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumZooKeeperServer.java" />
+        <option value="$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java" />
       </list>
     </option>
   </component>
@@ -140,42 +160,7 @@
             <path>
               <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
               <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
-              <item name="conf" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="apache" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="zookeeper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="apache" type="462c0819:PsiDirectoryNode" />
-              <item name="zookeeper" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -362,7 +347,8 @@
       <workItem from="1594778360740" duration="4222000" />
       <workItem from="1594863519672" duration="655000" />
       <workItem from="1595230215104" duration="1620000" />
-      <workItem from="1595666233120" duration="2925000" />
+      <workItem from="1595666233120" duration="3555000" />
+      <workItem from="1596116920997" duration="3482000" />
     </task>
     <servers />
   </component>
@@ -399,14 +385,14 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50920000" />
+    <option name="totallyTimeSpent" value="55032000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="725" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49344262" visible="true" weight="0.25767368" />
-      <window_info active="true" id="Structure" order="1" sideWeight="0.5065574" side_tool="true" visible="true" weight="0.25767368" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4918033" weight="0.26171243" />
+      <window_info id="Structure" order="1" sideWeight="0.5081967" side_tool="true" weight="0.26171243" />
       <window_info id="Designer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -418,7 +404,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.52163464" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.52131146" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.49917355" />
@@ -435,76 +421,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/proto/CreateRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/jute/Record.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/generated/org/apache/zookeeper/txn/TxnHeader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-481">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/persistence/TxnLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="83" column="9" selection-start-line="83" selection-start-column="9" selection-end-line="83" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home/src.zip!/java/io/OutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="137" column="16" selection-start-line="137" selection-start-column="16" selection-end-line="137" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/persistence/FileTxnLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4470">
-          <caret line="346" column="5" selection-start-line="317" selection-start-column="4" selection-end-line="346" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZKDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3810">
-          <caret line="330" column="33" selection-start-line="330" selection-start-column="28" selection-end-line="330" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/DataTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10455">
-          <caret line="772" column="28" selection-start-line="772" selection-start-column="28" selection-end-line="772" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/persistence/FileTxnSnapLog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4215">
-          <caret line="321" column="21" selection-start-line="321" selection-start-column="15" selection-end-line="321" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/SyncRequestProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2505">
@@ -512,24 +428,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/FinalRequestProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="108" column="66" selection-start-line="108" selection-start-column="66" selection-end-line="108" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/KeeperException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="477" column="55" lean-forward="true" selection-start-line="477" selection-start-column="55" selection-end-line="477" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -551,13 +453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="383">
           <caret line="40" column="30" lean-forward="true" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Leader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="591">
-          <caret line="1042" column="13" selection-start-line="1042" selection-start-column="13" selection-end-line="1042" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -625,13 +520,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
           <caret line="85" column="6" selection-start-line="85" selection-start-column="6" selection-end-line="85" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ProposalRequestProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-432">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -755,17 +643,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="146" column="7" lean-forward="true" selection-start-line="146" selection-start-column="7" selection-end-line="146" selection-end-column="7" />
-          <folding>
-            <element signature="e#25443#25444#0" expanded="true" />
-            <element signature="e#25524#25525#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxnSocket.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -789,24 +666,138 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/Watcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1222">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+        <state relative-caret-position="443">
+          <caret line="147" column="32" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/WatchedEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ZooKeeper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="995">
-          <caret line="314" lean-forward="true" selection-start-line="314" selection-end-line="314" />
+        <state relative-caret-position="137">
+          <caret line="150" column="28" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/ClientCnxn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="445" column="50" selection-start-line="445" selection-start-column="50" selection-end-line="445" selection-end-column="50" />
+        <state relative-caret-position="7170">
+          <caret line="508" column="50" lean-forward="true" selection-start-line="508" selection-start-column="50" selection-end-line="508" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/zookeeper-3.4.6/src/java/main/org/apache/zookeeper/server/quorum/ProposalRequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/PrepRequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="768" column="5" lean-forward="true" selection-start-line="768" selection-start-column="5" selection-end-line="768" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/LearnerSyncRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ProposalRequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="78" column="43" selection-start-line="78" selection-start-column="36" selection-end-line="78" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/Leader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="771" column="49" selection-start-line="771" selection-start-column="37" selection-end-line="771" selection-end-column="49" />
+          <folding>
+            <element signature="e#9049#9065#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/CommitProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/RequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/FollowerRequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="103" column="28" lean-forward="true" selection-start-line="103" selection-start-column="28" selection-end-line="103" selection-end-column="28" />
+          <folding>
+            <element signature="e#1588#1597#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ObserverRequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/ObserverZooKeeperServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="36" column="67" selection-start-line="36" selection-start-column="45" selection-end-line="36" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/LearnerZooKeeperServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="33" column="74" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/quorum/QuorumZooKeeperServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="29" column="67" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/FinalRequestProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="101" column="56" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/java/main/org/apache/zookeeper/server/ZooKeeperServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="123" column="47" selection-start-line="123" selection-start-column="29" selection-end-line="123" selection-end-column="47" />
+          <folding>
+            <element signature="e#4680#4694#0" expanded="true" />
           </folding>
         </state>
       </provider>
