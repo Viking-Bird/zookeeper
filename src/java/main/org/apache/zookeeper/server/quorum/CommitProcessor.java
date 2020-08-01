@@ -75,6 +75,7 @@ public class CommitProcessor extends Thread implements RequestProcessor {
                 }
                 toProcess.clear();
                 synchronized (this) {
+                    // 如果没有请求处理，则等待
                     if ((queuedRequests.size() == 0 || nextPending != null)
                             && committedRequests.size() == 0) {
                         wait();
@@ -136,7 +137,7 @@ public class CommitProcessor extends Thread implements RequestProcessor {
                                 toProcess.add(request);
                             }
                             break;
-                        default:
+                        default: // 对于非事务性的操作（查询，exist等）直接回把请求转到下一个处理器处理
                             toProcess.add(request);
                         }
                     }
@@ -150,6 +151,10 @@ public class CommitProcessor extends Thread implements RequestProcessor {
         LOG.info("CommitProcessor exited loop!");
     }
 
+    /**
+     * 将request添加到committedRequests队列中去
+     * @param request
+     */
     synchronized public void commit(Request request) {
         if (!finished) {
             if (request == null) {
@@ -165,6 +170,10 @@ public class CommitProcessor extends Thread implements RequestProcessor {
         }
     }
 
+    /**
+     * 由上游处理器调用，将request对象添加到queuedRequests请求队列中
+     * @param request
+     */
     synchronized public void processRequest(Request request) {
         // request.addRQRec(">commit");
         if (LOG.isDebugEnabled()) {
