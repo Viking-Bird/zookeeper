@@ -47,6 +47,7 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
      */
     HashMap<Long, SessionImpl> sessionsById = new HashMap<Long, SessionImpl>();
 
+    // 保存会话：key为过期时间，value为会话集合
     HashMap<Long, SessionSet> sessionSets = new HashMap<Long, SessionSet>();
 
     ConcurrentHashMap<Long, Integer> sessionsWithTimeout;
@@ -163,7 +164,7 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
                 }
                 // 2、到了超时时间点，开始处理session过期任务
                 SessionSet set;
-                // 拿出当前过期时间点的所有session
+                // 移除当前过期时间点的所有session
                 set = sessionSets.remove(nextExpirationTime);
                 if (set != null) {
                     for (SessionImpl s : set.sessions) {
@@ -201,7 +202,7 @@ public class SessionTrackerImpl extends Thread implements SessionTracker {
             return true;
         }
 
-        // 在这个时间点，很有很多的session，这里的sessionSets用于封装这些session
+        // 在这个时间点，会有很多的session，这里的sessionSets用于封装这些session
         SessionSet set = sessionSets.get(s.tickTime);
         if (set != null) {
             // 从sessionSets移除当前session
